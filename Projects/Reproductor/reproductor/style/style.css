@@ -1,0 +1,219 @@
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(MaterialDesign/MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+        local('MaterialIcons-Regular'),
+        url(MaterialDesign/MaterialIcons-Regular.woff2) format('woff2'),
+        url(MaterialDesign/MaterialIcons-Regular.woff) format('woff'),
+        url(MaterialDesign/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+html, body
+{
+    height: 100%;
+    width: 100%;
+}
+
+.auto-scroll
+{
+    overflow: hidden;
+}
+
+.auto-scroll:hover
+{
+    overflow: auto;
+}
+
+.material-icons 
+{
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+
+    vertical-align: middle !important;
+    padding-bottom: 3px;
+    margin-right: 0.2em;
+}
+
+.bottom-white-border { border-bottom: 0.1rem solid whitesmoke; }
+.border-color-white { border-color: whitesmoke; }
+
+.bg-light-gray { background: rgb(69, 75, 82); }
+.color-green { color: whitesmoke; }
+.color-green:hover { color: #28A745; }
+.color-green:focus { box-shadow: unset; }
+
+header
+{
+    height: 58px;
+    background: #343A40;
+}
+
+main 
+{ 
+    height: calc( 100% - 5rem );
+    padding-top: 58px; 
+}
+
+footer
+{
+    position: relative;
+    height: 5rem;
+    background: #343A40;
+    border-top: 0.1rem solid rgb(112, 112, 112);
+    border-bottom: 0.1rem solid rgb(112, 112, 112);
+}
+
+.musicList 
+{ 
+    list-style-type: none; 
+    padding-right: 1rem; 
+    overflow: hidden; 
+}
+
+.musicList li { white-space: nowrap; }
+
+#userMusic
+{
+    width: 20rem;
+    color: whitesmoke;
+    height: 100%;
+    background: #343A40;
+    border-right: 0.1rem solid whitesmoke;
+    overflow: auto;
+}
+
+.no-border { border: 0 !important; }
+.no-padding { padding: 0 !important; }
+
+#main
+{
+    width: calc( 100% - 40rem );
+    background: #28A745;
+    overflow: auto;
+}
+
+#related
+{
+    padding-top: 1rem;
+    width: 20rem;
+    height: 100%;
+    background: #343A40;
+    border-left: 0.1rem solid whitesmoke;
+}
+
+.relatedItem
+{
+    height: 80px;
+    margin: 1rem;
+    margin-top: 0;
+    background: rgb(69, 75, 82);
+}
+
+#load-background
+{
+    position: absolute;
+    z-index: 999999;
+    width: 100vw;
+    height: 100vh;
+    background: rgba( 0, 0, 0, 0.5);
+}
+
+.loader
+{
+    position: absolute;
+    top: calc( 50vh - 6rem );
+    height: 6rem;
+    width: 100vw;
+    display: block;
+    background: rgba(255,255,255,0.5);
+}
+
+
+.loader *:first-child
+{
+    margin: auto;
+    height: 6rem;
+    width: 6rem;
+}
+
+.relative
+{
+    position: relative;
+}
+
+#banner
+{
+    height: 20vw;
+}
+
+#banner div, #banner img
+{
+    height: 100%;
+    width: 100%;
+}
+
+.FXmasonryItem 
+{
+    float: left;
+    width: 100%;
+    margin: 0;
+    -webkit-column-break-inside: avoid; /* Chrome, Safari */
+    page-break-inside: avoid;           /* Theoretically FF 20+ */
+    break-inside: avoid-column;         /* IE 11 */
+    display:table;
+
+    border: 1px solid darksalmon;
+    background: pink;
+    margin-bottom: 1rem;
+}
+
+.FXmasonry
+{
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;
+
+    -webkit-column-gap: 1rem; /* Chrome, Safari, Opera */
+    -moz-column-gap: 1rem; /* Firefox */
+    column-gap: 1rem;
+}
+
+@media only screen and ( max-width: 1280px ) 
+{
+    .FXmasonry 
+    {
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media only screen and ( min-width: 1280px )
+{
+    .container
+    {
+        max-width: 1440px;
+    }
+}

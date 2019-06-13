@@ -1,0 +1,119 @@
+.col-player
+{
+    width: 20rem;
+}
+
+.col-controls
+{
+    width: calc( 100% - 40rem );
+}
+
+.list-group-item.active 
+{
+    z-index: 2;
+    color: #fff;
+    background-color: aquamarine;
+    border-color: aquamarine;
+}
+
+#volume
+{
+    cursor: pointer;
+    display: inline-block;
+    width: 8rem;
+    height: 0.5rem;
+    margin-right: 0.4rem;
+}
+
+#volume > div
+{
+    background: rgb(79, 175, 212);
+}
+
+#volume span
+{
+    cursor: pointer;
+    border-radius: 99rem;
+    background: rgb(37, 121, 155);
+    top: -0.4rem;
+}
+
+#music_time
+{
+    cursor: pointer;
+    width: calc( 100vw - 0.6em );
+    height: 0.5rem;
+}
+
+#music_time > div
+{
+    background: rgb(79, 175, 212);
+}
+
+#music_time span
+{
+    cursor: pointer;
+    border-radius: 99rem;
+    background: rgb(37, 121, 155);
+    top: -0.4rem;
+}
+
+.progressBar
+{
+    position: absolute;
+    width: 100%;
+    background: whitesmoke;
+    top: -0.5rem;
+}
+
+.volume-control
+{
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.playButton
+{
+    font-size: 2em;
+}
+
+.media_hyperlink
+{
+    cursor: pointer;
+    color: whitesmoke;
+    transition: color 0.3s;
+}
+
+.media_hyperlink:hover
+{
+    color: #28A745;
+    transition: color 0.3s;
+}
+
+.thumbnail
+{
+    background: gray; 
+    height: calc(100% - 1rem); 
+    width: 4rem; 
+    margin: 0.5rem;
+}
+
+.song-title
+{
+    margin-top: 0.5rem;
+    padding-left: 0.25rem;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.song-author
+{
+    padding-left: 0.25rem;
+    font-size: 0.75rem;
+}
+
+.song-album
+{
+    padding-left: 0.25rem;
+    font-size: 0.75rem;
+}

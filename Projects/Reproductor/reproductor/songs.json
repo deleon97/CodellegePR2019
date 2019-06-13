@@ -1,0 +1,191 @@
+[
+   {
+      "title": "One Dance",
+      "author": "Drake",
+      "album": "Unknown",
+      "year": 2016,
+      "thumbnail": "shared/img/default.png",
+      "duration":174,
+      "colaborators":[],
+      "location": "/reproductor/shared/audio/Drake%20-%20One%20Dance.mp3",
+      "id": 4
+  },
+  {
+      "title": "Amarrame",
+      "author": "Mon Laferte",
+      "album": "La trenza",
+      "year": 2018,
+      "thumbnail": "shared/img/default.png",
+      "duration": "207",
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Mon%20Laferte%20-%20Am%c3%a1rrame.mp3",
+      "id": 5
+  },
+  {
+      "title": "Flaco",
+      "author": "Mon Laferte",
+      "album": "La trenza",
+      "year": 2018,
+      "thumbnail": "shared/img/default.png",
+      "duration": 256,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Mon%20Laferte%20-%20Flaco.mp3",
+      "id": 6
+
+  },
+  {
+      "title": "Secrets",
+      "author": "One Republic",
+      "album": "Waking Up",
+      "year":2009,
+      "thumbnail": "shared/img/default.png",
+      "duration": "206",
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/OneRepublic%20-%20Secrets.mp3",
+      "id": 7
+  },
+   {
+      "title": "Ojos Color Sol",
+      "author": "Calle 13",
+      "album": "MultiViral",
+      "year": 2014,
+      "thumbnail": "shared/img/default.png",
+      "duration": 201,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Calle 13 - Ojos Color Sol.mp3",
+      "id": 8
+   },
+   {
+      "title": "No Te Contaron Mal",
+      "author": "Christian Nodal",
+      "album": "Traditional Mexicano",
+      "year": 2018,
+      "thumbnail": "shared/img/default.png",
+      "duration": 124,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Christian Nodal - No Te Contaron Mal.mp3",
+      "id": 9
+   },
+   {
+      "title": "The Scientist",
+      "author": "Coldplay",
+      "album": "A Rush Of Blood To The Head",
+      "year": 2002,
+      "thumbnail": "shared/img/default.png",
+      "duration": 306,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Coldplay - The Scientist.mp3",
+      "id": 10
+   },
+   {
+      "title": "Yellow",
+      "author": "Coldplay",
+      "album": "Parachutes",
+      "year": 2000,
+      "thumbnail": "shared/img/default.png",
+      "duration": 255,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Coldplay - Yellow.mp3",
+      "id": 11
+   },
+   {
+      "title": "Guns N Roses",
+      "author": "Greatest Hits",
+      "album": "Unknown",
+      "year": 2004,
+      "thumbnail": "shared/img/default.png",
+      "duration": 333,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Guns N Roses - Sweet Child O Mine.mp3",
+      "id": 12
+   },
+   {
+      "title": "Laurtita Garza",
+      "author": "Los Invasores De Nuevo León",
+      "album": "Unknown",
+      "year": 2005,
+      "thumbnail": "shared/img/default.png",
+      "duration": 186,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Los Invasores De Nuevo León - Laurita Garza.mp3",
+      "id": 13
+   },
+   {
+      "title": "Calma",
+      "author": "Pedro Capó",
+      "album": "Calma",
+      "year": 2018,
+      "thumbnail": "shared/img/default.png",
+      "duration": 180,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Pedro Capó - Calma.mp3",
+      "id": 14
+   },
+   {
+      "title": "Estoy Enamorado",
+      "author": "Pedro Capó",
+      "album": "En Letra de Otro",
+      "year": 2017,
+      "thumbnail": "shared/img/default.png",
+      "duration": 214,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Pedro Capó - Estoy Enamorado.mp3",
+      "id": 15
+   },
+   {
+      "title": "Prometiste",
+      "author": "Pepe Aguilar",
+      "album": "Negociaré Con la Pena",
+      "year": 2018,
+      "thumbnail": "shared/img/default.png",
+      "duration": 202,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Pepe Aguilar - Prometiste.mp3",
+      "id": 16
+   },
+   {
+      "title": "Te vi",
+      "author": "Piso 21",
+      "album": "Te Vi",
+      "year": 2018,
+      "thumbnail": "shared/img/default.png",
+      "duration": 210,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Piso 21 - Te Vi.mp3",
+      "id": 17
+   },
+   {
+      "title": "Anywhere",
+      "author": "RITA ORA",
+      "album": "Anywhere",
+      "year": 2017,
+      "thumbnail": "shared/img/default.png",
+      "duration": 201,
+      "colaborators": [],
+      "location":"/reproductor/shared/audio/RITA ORA - Anywhere.mp3",
+      "id": 18
+   },
+   {
+      "title": "Sunflower (Spider-Man_ Into the Spider-Verse)",
+      "author": "Post Malone",
+      "album": "Spider-Man: Into the Spider-Verse (Soundtrack From & Inspired by the Motion Picture)",
+      "year": 2018,
+      "thumbnail": "shared/img/default.png",
+      "duration": 210,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Post Malone - Sunflower (Spider-Man_ Into the Spider-Verse).mp3",
+      "id": 19
+   },
+   {
+      "title": "En Donde Esta Tu Amor",
+      "author": "Virlan Garcia",
+      "album": "Mi Vida Eres Tú",
+      "year": 2017,
+      "thumbnail": "shared/img/default.png",
+      "duration": 202,
+      "colaborators": [],
+      "location": "/reproductor/shared/audio/Virlan Garcia - En Donde Esta Tu Amor.mp3",
+      "id": 20
+   }
+
+]

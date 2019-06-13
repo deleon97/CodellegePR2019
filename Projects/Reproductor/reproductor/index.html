@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Estilos importados-->
+    <link rel="stylesheet" href="style/bootstrap.css">
+    <link rel="stylesheet" href="js/jQueryUI/jquery-ui.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/player.css">
+    <link rel="stylesheet" href="style/playlist.css">
+
+    <!--Scripts importados-->
+    <script src="js/jquery.js"></script>
+    <script src="js/jQueryUI/jquery-ui.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/EndpointRequest.js"></script>
+    <script src="js/MusicPlayer.data.js"></script>
+    <script src="js/player.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <title>Reproductor</title>
+</head>
+<body>
+    <div id="app" class="h-100 w-100">
+        <section id="load-background" v-show="BackgroundControl.visible">
+            <article class="loader">
+                <div class="d-flex h-100 justify-content-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <header class="fixed-top bottom-white-border">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#" v-on:click="Home.visible = true;">LOGO</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link">Reproductor.Titulo<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container-fluid">
+            <div class="row h-100">
+                <section id="userMusic">
+                        <div id="accordion">
+                            <div class="card no-border bg-transparent">
+                                <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn color-green" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        <i class="material-icons">queue_music</i>My Songs
+                                    </button>
+                                </h5>
+                                </div>
+                            
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body bg-light-gray">
+                                    <template v-if="!userData.myUploads.fetchingFromServer">
+                                        <ul class = "musicList">
+                                            <li v-for="song in userData.myUploads.data.data.data"
+                                                class="media_hyperlink" v-on:click="OpenMedia(song, 'A')">
+                                                    <i class="material-icons">music_note</i>
+                                                    {{ song.title }} - {{ song.author }}
+                                            </li>
+                                        </ul>
+                                    </template>
+                                    <template v-else>
+                                        <h3 class="color-white">No uploads for user</h3>
+                                    </template>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="card no-border bg-transparent">
+                                <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn color-green collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <i class="material-icons">playlist_play</i>My Playlists
+                                    </button>
+                                </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div class="card-body bg-light-gray">
+                                        <template v-if="!userData.myPlaylists.fetchingFromServer">
+                                            <ul class = "musicList">
+                                                <li v-for="playlist in userData.myPlaylists.data.data.data"
+                                                    class="media_hyperlink" v-on:click="OpenMedia( { ids: playlist.songs, name: playlist.name, description: playlist.description, thumbnail: playlist.thumbnail, owner: playlist.creator }, 'P')">
+                                                        <i class="material-icons">list</i>
+                                                        {{ playlist.name }}
+                                                </li>
+                                            </ul>
+                                        </template>
+                                        <template v-else>
+                                            <h3 class="color-white">No playlists for user</h3>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card no-border bg-transparent">
+                                <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button class="btn color-green collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                        <i class="material-icons">favorite</i>Favorite Tracks
+                                    </button>
+                                </h5>
+                                </div>
+                                <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                                    <div class="card-body bg-light-gray overflow-hidden">
+                                        <template v-if="!userData.myFavorites.fetchingFromServer">
+                                            <ul class = "musicList">
+                                                <li v-for="song in userData.myFavorites.data.data.data"
+                                                    class="media_hyperlink" v-on:click="OpenMedia(song, 'A')">
+                                                        <i class="material-icons">favorite_border</i>
+                                                        {{ song.title }} - {{ song.author }}
+                                                </li>
+                                            </ul>
+                                        </template>
+                                        <template v-else>
+                                            <h3 class="color-white">No favorites for user</h3>
+                                        </template>
+                                        <div class="float-right">
+                                            <button v-on:click="userData.myFavorites.list.songs = []; FindListFor( userData.myFavorites, 0 );" type="button" class="btn btn-success btn-sm">Open Playlist</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </section>
+                
+                <section id="main" class="overflow-auto h-100">
+                    <div id="banner" v-show="Home.visible">
+                        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="shared/img/banner.jpg" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="shared/img/banner2.jpg" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="shared/img/banner3.jpg" class="d-block w-100" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container px-0">
+                        <article class="home-component h-100" v-show="Home.visible" >
+                            <div class="h-100 overflow-auto px-4">
+                                
+                                <div class="py-4">
+                                    <h1 v-for="genre in Genres.types" class="d-inline-block mr-2">
+                                        <span class="badge badge-secondary" v-bind:style="{ background: genre.color + '' }">
+                                            {{ genre.name }}
+                                        </span>
+                                    </h1>
+                                </div>
+
+                                <div class="FXmasonry">
+                                    <div class="FXmasonryItem">
+                                        <div class="card">
+                                            <img class="card-img-top" src="shared/img/authors/mj.jpg" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Michael Jackson</h5>
+                                                <p class="card-text">Conocido como el «Rey del Pop»,5​ sus contribuciones y reconocimiento en la historia de la música y el baile, así como su publicitada vida personal, lo convirtieron en una figura internacional en la cultura popular durante más de cuatro décadas.</p>
+                                                <a href="#" class="btn btn-primary float-right">View more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="FXmasonryItem">
+                                        <div class="card">
+                                            <img class="card-img-top" src="shared/img/authors/basshunter.jpg" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Basshunter</h5>
+                                                <p class="card-text">Jonas Erik Altberg (Halmstad, Suecia, 22 de diciembre de 1984),1​ conocido internacionalmente bajo el nombre artístico Basshunter (pronunciado en inglés: /ˈbeɪshʌntər/) es un cantante, productor y disc-jockey2​ sueco de música electrónica, en una amplia acepción que incluye subgéneros como el eurodance, Handsup, hard dance,3​ euro-trance, dance y hardstyle.</p>
+                                                <a href="#" class="btn btn-primary float-right">View more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="FXmasonryItem">
+                                        <div class="card">
+                                            <img class="card-img-top" src="shared/img/authors/guetta.jpg" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title">David Guetta</h5>
+                                                <p class="card-text">Pierre David Guetta7​ (París, 7 de noviembre de 1967), más conocido como David Guetta,8​9​ es un disc-jockey de EDM y productor discográfico francés de ascendencia marroquí, sefardí y belga. Actualmente ocupa el lugar #6 según la encuesta realizada por DJ Mag.</p>
+                                                <a href="#" class="btn btn-primary float-right">View more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="FXmasonryItem">
+                                        <div class="card">
+                                            <img class="card-img-top" src="shared/img/authors/snoop.png" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Snoop Dogg</h5>
+                                                <p class="card-text">Calvin Cordozar Broadus Jr. (Long Beach, 20 de octubre de 1971), más conocido como Snoop Dogg o Snoop Lion,2​ es un rapero, cantante, productor y actor estadounidense. Ha sido uno de los artistas de hip-hop con más éxito del West Coast rap además de uno de los más notables amigos del productor Dr. Dre.</p>
+                                                <a href="#" class="btn btn-primary float-right">View more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="FXmasonryItem">
+                                        <div class="card">
+                                            <img class="card-img-top" src="shared/img/authors/perry.jpg" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Katy Perry</h5>
+                                                <p class="card-text">Katheryn Elizabeth Hudson (Santa Bárbara, California, 25 de octubre de 1984), más conocida por su nombre artístico Katy Perry, es una cantante y compositora estadounidense, jueza del programa de talentos American Idol, que saltó a la fama en 2008 con «I Kissed a Girl» y «Hot n Cold» de su segundo álbum One of the Boys (2008).</p>
+                                                <a href="#" class="btn btn-primary float-right">View more</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                        </article>
+
+                        <article class="playlist-component" v-show="!PlayList.isLoading && !Home.visible">
+                            <div class="text-white text-truncate relative h-100">
+                                <img class="playlist-thumbnail float-left" width="100%" height="100%" v-bind:src="PlayList.thumbnail" />
+                                <div class="playlist-name break-word">
+                                    {{ PlayList.name }} 
+                                    <span class="badge badge-primary badge-dark">
+                                        PLAYLIST
+                                    </span> 
+                                </div>
+                                <div class="playlist-description break-word">{{ PlayList.description }}</div>
+                                <div class="playlist-owner break-word">
+                                    Creator: {{ PlayList.owner }} |
+                                    <span class="badge badge-primary badge-dark">
+                                        Number of songs: {{PlayList.songs.length}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="list-group mx-4" role="tablist">
+                                <a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action pointer list-song" 
+                                v-for="song in PlayList.songs" 
+                                v-on:click="OpenMedia( song, 'A');"
+                                data-toggle="list" role="tab" v-if="song.title" >
+                                    {{ song.title }} - {{ song.author }}
+                                    <span class="badge badge-primary badge-success">
+                                        {{ Math.floor( song.duration / 60 ) }}
+                                        :
+                                        {{ song.duration % 60 < 10 ? '0' + ( song.duration % 60 ) : song.duration % 60 }}
+                                    </span>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="related" class="auto-scroll">
+
+                    <h4 class="color-green mb-3 text-center">
+                        Recomendations
+                    </h4>
+
+                    <div class="row relatedItem">
+                        <div class="col-4 px-0 h-100 w-100">
+                            <img src="shared/img/fox.png" class="w-100 h-100" />
+                        </div>
+                        <div class="col-8 px-0 h-100 auto-scroll">
+                            <h5 class="color-green px-2">Título de la canción bla bla bla sdfd fsd fd sd sd</h5>
+                            <h6 class="color-green px-2">Álbum bdasdl sdf dfsd fd fsf dfs</h6>
+                        </div>
+                    </div>
+                    <div class="px-3"><hr class="border-color-white"></div>
+
+                    <div class="row relatedItem">
+                        <div class="col-4 px-0 h-100 w-100">
+                            <img src="shared/img/fox.png" class="w-100 h-100" />
+                        </div>
+                        <div class="col-8 px-0 h-100 auto-scroll">
+                            <h5 class="color-green px-2">Título de la canción bla bla bla sdfd fsd fd sd sd</h5>
+                            <h6 class="color-green px-2">Álbum bdasdl sdf dfsd fd fsf dfs</h6>
+                        </div>
+                    </div>
+                    <div class="px-3"><hr class="border-color-white"></div>
+
+                    <div class="row relatedItem">
+                        <div class="col-4 px-0 h-100 w-100">
+                            <img src="shared/img/fox.png" class="w-100 h-100" />
+                        </div>
+                        <div class="col-8 px-0 h-100 auto-scroll">
+                            <h5 class="color-green px-2">Título de la canción bla bla bla sdfd fsd fd sd sd</h5>
+                            <h6 class="color-green px-2">Álbum bdasdl sdf dfsd fd fsf dfs</h6>
+                        </div>
+                    </div>
+                    <div class="px-3"><hr class="border-color-white"></div>
+
+                    <div class="row relatedItem">
+                        <div class="col-4 px-0 h-100 w-100">
+                            <img src="shared/img/fox.png" class="w-100 h-100" />
+                        </div>
+                        <div class="col-8 px-0 h-100 auto-scroll">
+                            <h5 class="color-green px-2">Título de la canción bla bla bla sdfd fsd fd sd sd</h5>
+                            <h6 class="color-green px-2">Álbum bdasdl sdf dfsd fd fsf dfs</h6>
+                        </div>
+                    </div>
+                    <div class="px-3"><hr class="border-color-white"></div>
+
+                    <div class="row relatedItem">
+                        <div class="col-4 px-0 h-100 w-100">
+                            <img src="shared/img/fox.png" class="w-100 h-100" />
+                        </div>
+                        <div class="col-8 px-0 h-100 auto-scroll">
+                            <h5 class="color-green px-2">Título de la canción bla bla bla sdfd fsd fd sd sd</h5>
+                            <h6 class="color-green px-2">Álbum bdasdl sdf dfsd fd fsf dfs</h6>
+                        </div>
+                    </div>
+                    <div class="px-3"><hr class="border-color-white"></div>
+
+                    <div class="row relatedItem">
+                        <div class="col-4 px-0 h-100 w-100">
+                            <img src="shared/img/fox.png" class="w-100 h-100" />
+                        </div>
+                        <div class="col-8 px-0 h-100 auto-scroll">
+                            <h5 class="color-green px-2">Título de la canción bla bla bla sdfd fsd fd sd sd</h5>
+                            <h6 class="color-green px-2">Álbum bdasdl sdf dfsd fd fsf dfs</h6>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+        </main>
+
+        <footer>
+
+            <div class="progressBar">
+                <div id="music_time"></div>
+            </div>
+
+            <div class="d-flex w-100 h-100">
+                <div class="w-100 h-100 text-center align-self-center row overflow-hidden">
+                    <div class="col-player h-100 col text-left float-left">
+                        <div class="text-white text-truncate h-100" v-show="CurrentSong.enabled">
+                            <img class="thumbnail float-left" width="100%" height="100%" v-bind:src="CurrentSong.thumbnail" />
+                            <div class="text-truncate song-title">{{ CurrentSong.title }}</div>
+                            <div class="text-truncate song-author">{{ CurrentSong.author }}</div>
+                            <div class="text-truncate song-album">{{ CurrentSong.album }}</div>
+                        </div>
+                    </div>
+                    <div class="col-controls h-100 float-left">
+                        <div class="d-flex w-100 h-100">
+                            <div class="w-100 text-center align-self-center overflow-hidden">
+                                <!--Controles de volumen-->
+                                <section class="d-inline-block">
+                                    <span class="d-inline-block volume-control">
+                                        <i class="material-icons">volume_down</i>
+                                    </span> 
+                                    <div id="volume"></div> 
+                                    <span class="d-inline-block volume-control">
+                                        <i class="material-icons">volume_up</i>
+                                    </span>
+                                </section>
+            
+                                <!--Controles de shuffle y previous-->
+                                <section class="d-inline-block">
+                                    <span class="d-inline-block volume-control">
+                                        <i class="material-icons">shuffle</i>
+                                    </span> 
+            
+                                    <span class="d-inline-block volume-control">
+                                        <i class="material-icons">skip_previous</i>
+                                    </span>
+                                </section>
+            
+                                <!--Control de play/pause-->
+                                <section class="d-inline-block">
+                                    <span class="d-inline-block volume-control">
+                                        <i class="material-icons playButton" onclick="AudioPlayer.play( this );">play_arrow</i>
+                                    </span> 
+                                </section>
+            
+                                <!--Controles de next y replay-->
+                                <section class="d-inline-block">
+                                    <span class="d-inline-block volume-control">
+                                        <i class="material-icons">skip_next</i>
+                                    </span> 
+            
+                                    <span class="d-inline-block volume-control">
+                                        <i class="material-icons">replay</i>
+                                    </span>
+                                </section>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-player h-100 float-left">
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
